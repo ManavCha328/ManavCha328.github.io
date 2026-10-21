@@ -126,12 +126,14 @@
   .facts{display:flex; flex-wrap:wrap; gap:8px 22px; font-size:14.5px; color:var(--muted); font-weight:600}
   .facts b{color:var(--ink); font-weight:700}
   figure.hero-photo{margin:0; grid-column:1/-1}
+  /* One standardized picture background: every photo, render, and
+     illustration on the page sits on the same neutral matte (--matte),
+     whether it fills its frame (cover) or letterboxes (contain). */
   .hero-photo .frame{
     border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow);
-    border:1px solid var(--line); background:var(--plate);
+    border:1px solid var(--line); background:var(--matte);
     position:relative; aspect-ratio:16/9;
   }
-  .hero-photo .frame:has(> .slide.on img.fit-contain){background:var(--matte)}
   .hero-photo img{width:100%; height:100%; object-fit:cover; aspect-ratio:16/9}
   figcaption{font-size:13px; color:var(--muted); margin-top:10px; font-family:"IBM Plex Mono",monospace}
   figcaption a{color:var(--muted); text-decoration:underline}
@@ -209,7 +211,7 @@
   .card-link:hover{color:var(--ink)}
   .card-link:hover .card-title{color:var(--blue-ink)}
   .card-link:hover .card-cta{color:var(--orange)}
-  .card-frame{display:block; overflow:hidden; background:var(--plate)}
+  .card-frame{display:block; overflow:hidden; background:var(--matte)}
   .card-frame img{width:100%; aspect-ratio:16/9; object-fit:cover}
   .card-frame img.fit-contain{object-fit:contain; background:var(--matte)}
   .card-body{display:block; padding:18px 20px 20px}
@@ -236,9 +238,9 @@
   .back-link{display:inline-block; font-weight:700; font-size:15px; text-decoration:none; margin-bottom:24px}
   .d-title{font-size:clamp(30px,4vw,42px); letter-spacing:-.02em; font-weight:700; margin:0 0 4px; line-height:1.1}
   .d-grid{display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); gap:36px; align-items:start; margin-top:22px}
-  .d-media .frame{border-radius:var(--radius); overflow:hidden; border:1px solid var(--line); box-shadow:var(--shadow); background:var(--plate)}
+  .d-media .frame{border-radius:var(--radius); overflow:hidden; border:1px solid var(--line); box-shadow:var(--shadow); background:var(--matte)}
   .d-media img.main{width:100%; aspect-ratio:4/3; object-fit:cover}
-  .d-media img.main.contain{object-fit:contain; background:var(--surface-2); padding:14px}
+  .d-media img.main.contain{object-fit:contain; background:var(--matte); padding:14px}
   .d-media img.main[hidden]{display:none}
   .vid-head{font-size:19px; font-weight:700; letter-spacing:-.01em; margin:32px 0 4px}
   .vid-sub{color:var(--muted); font-size:14.5px; margin:0 0 14px}
@@ -246,7 +248,7 @@
   .video-list figure{margin:0}
   .video-list video{
     width:100%; aspect-ratio:16/9; object-fit:contain; display:block;
-    background:var(--plate); border:1px solid var(--line-strong); border-radius:var(--radius);
+    background:var(--matte); border:1px solid var(--line-strong); border-radius:var(--radius);
   }
   .video-list figcaption{margin-top:8px}
   .vid-layout{display:grid; grid-template-columns:1fr 1fr; gap:18px; align-items:start}
@@ -254,14 +256,14 @@
   @media (max-width: 640px){ .vid-layout{grid-template-columns:1fr} }
   .stream-head{font-size:15px; font-weight:700; letter-spacing:-.01em; margin:0 0 10px}
   .stream-frame{
-    position:relative; aspect-ratio:16/9; background:var(--plate);
+    position:relative; aspect-ratio:16/9; background:var(--matte);
     border:1px solid var(--line-strong); border-radius:var(--radius); overflow:hidden;
   }
   .stream-frame iframe{position:absolute; inset:0; width:100%; height:100%; border:0; display:block}
   .stream-cap{font-size:13px; color:var(--muted); font-family:"IBM Plex Mono",monospace; margin:8px 0 0}
-  .trio{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; padding:10px; aspect-ratio:3/1; background:var(--plate)}
+  .trio{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; padding:10px; aspect-ratio:3/1; background:var(--matte)}
   .trio[hidden]{display:none}
-  .trio-cell{position:relative; margin:0; border-radius:8px; overflow:hidden; background:var(--surface-2)}
+  .trio-cell{position:relative; margin:0; border-radius:8px; overflow:hidden; background:var(--matte)}
   .trio-cell img{width:100%; height:100%; object-fit:cover}
   .trio-lab{
     position:absolute; left:8px; bottom:8px; background:rgba(8,16,28,.75); color:#fff;
@@ -296,7 +298,7 @@
   .gallery{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
   .gallery figure{margin:0; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; transition:border-color .2s ease, box-shadow .2s ease, transform .2s ease}
   .gallery figure:hover{border-color:var(--line-strong); box-shadow:var(--shadow); transform:translateY(-2px)}
-  .gallery img{width:100%; height:210px; object-fit:cover}
+  .gallery img{width:100%; height:210px; object-fit:cover; background:var(--matte)}
   /* Portrait/square sources: anchor the cover crop on the subject instead
      of the default center, which cut the robots out of frame. */
   .gallery img.focus-top{object-position:50% 18%}
