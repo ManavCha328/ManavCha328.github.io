@@ -360,6 +360,40 @@
   .d-nav a .dir{display:block; font-size:12.5px; font-weight:600; color:var(--muted); letter-spacing:.04em; text-transform:uppercase; margin-bottom:2px}
   .d-nav a.next{margin-left:auto; text-align:right}
   .d-nav a:hover .ttl{color:var(--orange)}
+  .d-subhead{font-size:13px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin:22px 0 8px}
+  .d-subhead:first-child{margin-top:0}
+  .d-body .chips{margin-bottom:18px}
+
+  /* ---------- lightbox ---------- */
+  .zoomable{cursor:zoom-in}
+  dialog.lightbox{
+    border:none; padding:0; background:transparent; max-width:none; max-height:none;
+    width:100%; height:100%;
+  }
+  dialog.lightbox::backdrop{background:rgba(6,12,20,.92)}
+  .lb-stage{
+    height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:12px; padding:20px;
+  }
+  .lb-stage img{
+    max-width:min(1100px,94vw); max-height:78vh; object-fit:contain;
+    background:var(--matte); border-radius:8px;
+  }
+  .lb-cap{color:#d7e3ee; font-size:14.5px; font-weight:600; text-align:center; max-width:70ch; margin:0}
+  .lb-close{
+    position:absolute; top:14px; right:14px; width:44px; height:44px; border-radius:50%;
+    border:1px solid rgba(255,255,255,.4); background:rgba(8,16,28,.6); color:#fff;
+    font-size:20px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center;
+  }
+  .lb-close:hover{border-color:var(--orange); color:var(--orange)}
+  .expand-btn{
+    position:absolute; top:10px; right:10px; z-index:4;
+    border:1px solid rgba(255,255,255,.45); background:rgba(8,16,28,.55); color:#fff;
+    font-size:12.5px; font-weight:700; letter-spacing:.02em;
+    padding:6px 11px; border-radius:99px; cursor:pointer;
+  }
+  .expand-btn:hover{background:rgba(8,16,28,.88); border-color:var(--orange); color:#fff}
+  .card-frame{position:relative}
 
   /* ---------- print: a clean one-column handout ---------- */
   @media print{
@@ -493,6 +527,7 @@
           </a>
           <button type="button" class="slide-arrow prev" id="hero-prev" aria-label="Previous slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="14.5 5 7.5 12 14.5 19" /></svg></button>
           <button type="button" class="slide-arrow next" id="hero-next" aria-label="Next slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9.5 5 16.5 12 9.5 19" /></svg></button>
+          <button type="button" class="expand-btn" id="hero-expand" aria-label="View current slide photo full-screen">⤢ View photo</button>
         </div>
         <div class="slide-dots" id="hero-dots" role="group" aria-label="Choose hero slide"></div>
       </figure>
@@ -663,8 +698,11 @@
         </div>
       </div>
       <div class="d-body">
+        <h3 class="d-subhead">Overview</h3>
         <p class="desc" id="d-desc"></p>
+        <h3 class="d-subhead">Key work &amp; results</h3>
         <ul id="d-points"></ul>
+        <h3 class="d-subhead">Tools &amp; methods</h3>
         <div class="chips" id="d-chips"></div>
         <div class="p-links" id="d-links"></div>
       </div>
@@ -694,7 +732,7 @@
       <div class="t-row">
         <div class="t-when">Sep 2024–Present</div>
         <div class="t-what"><h3>Executive Chair <span>· SIGRobotics</span></h3>
-          <p>Lead LeKiwi hardware (1,469★, 100+ community builds); also SO-100 arms, K-Scale humanoids, and TurtleBots: teleoperation, data collection, MuJoCo sim-to-hardware testing.</p></div>
+          <p>Lead LeKiwi hardware (1,469★, 100s of community builds); also SO-100 arms, K-Scale humanoids, and TurtleBots: teleoperation, data collection, MuJoCo sim-to-hardware testing.</p></div>
         <div class="t-where">UIUC</div>
       </div>
       <div class="t-row">
@@ -796,6 +834,14 @@
   </section>
 
 </main>
+
+<dialog class="lightbox" id="lightbox" aria-label="Image viewer">
+  <div class="lb-stage">
+    <button type="button" class="lb-close" id="lb-close" aria-label="Close image viewer">✕</button>
+    <img id="lb-img" alt="" />
+    <p class="lb-cap" id="lb-cap"></p>
+  </div>
+</dialog>
 
 <footer class="site">
   <div class="wrap foot">
@@ -1367,6 +1413,83 @@
       });
     }, { rootMargin: '-40% 0px -55% 0px' });
     sections.forEach(function(s){ so.observe(s); });
+  }
+
+  // ---------- lightbox: click any project or bench photo to view it
+  // full-screen; Esc, backdrop click, or the close button dismisses it.
+  var lightbox = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lb-img');
+  var lbCap = document.getElementById('lb-cap');
+  var lbClose = document.getElementById('lb-close');
+  if (lightbox && lbImg) {
+    function openLightbox(img){
+      lbImg.src = img.currentSrc || img.src;
+      lbImg.alt = img.alt || '';
+      var cap = img.alt || '';
+      var fig = img.closest ? img.closest('figure') : null;
+      if (fig) {
+        var fc = fig.querySelector('figcaption');
+        if (fc && fc.textContent.trim()) cap = fc.textContent.trim();
+      }
+      var slider = img.closest ? img.closest('.p-slider') : null;
+      if (slider) {
+        var sc = slider.querySelector('figcaption');
+        if (sc && sc.textContent.trim()) cap = sc.textContent.trim();
+      }
+      lbCap.textContent = cap;
+      lbCap.style.display = cap ? '' : 'none';
+      if (typeof lightbox.showModal === 'function') { lightbox.showModal(); }
+      else { lightbox.setAttribute('open', ''); }
+    }
+    function closeLightbox(){
+      if (lightbox.open) lightbox.close();
+      lbImg.src = '';
+    }
+    [dGalleries, document.getElementById('bench')].forEach(function(root){
+      if (!root) return;
+      root.addEventListener('click', function(e){
+        var t = e.target;
+        if (t && t.tagName === 'IMG') openLightbox(t);
+      });
+      root.querySelectorAll('img').forEach(function(im){ im.classList.add('zoomable'); });
+    });
+    // Detail sliders build their images dynamically; mark them on open.
+    var galObserver = new MutationObserver(function(){
+      dGalleries.querySelectorAll('img').forEach(function(im){ im.classList.add('zoomable'); });
+    });
+    galObserver.observe(dGalleries, { childList: true, subtree: true });
+    lbClose.addEventListener('click', closeLightbox);
+    // The stage fills the dialog, so backdrop clicks land on it: close
+    // when the click is on the dialog or the stage, not the photo/caption.
+    lightbox.addEventListener('click', function(e){
+      if (e.target === lightbox || e.target.classList.contains('lb-stage')) closeLightbox();
+    });
+    // Expand controls for the homepage's two most prominent image sets:
+    // each project card gets one (the rest of the card still navigates
+    // to the detail page), and the hero gets one for the current slide.
+    document.querySelectorAll('.card').forEach(function(card){
+      var frame = card.querySelector('.card-frame');
+      var img = frame ? frame.querySelector('img') : null;
+      if (!frame || !img) return;
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'expand-btn';
+      b.textContent = '⤢ View photo';
+      b.setAttribute('aria-label', 'View this project photo full-screen');
+      b.addEventListener('click', function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        openLightbox(img);
+      });
+      frame.appendChild(b);
+    });
+    var heroExpand = document.getElementById('hero-expand');
+    if (heroExpand && heroFrame) {
+      heroExpand.addEventListener('click', function(){
+        var img = heroFrame.querySelector('.slide.on img');
+        if (img) openLightbox(img);
+      });
+    }
   }
 
   // ---------- about read more ----------
