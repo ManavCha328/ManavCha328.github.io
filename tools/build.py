@@ -166,7 +166,7 @@ def build_index():
     # Strongest verified outcomes first; case-study pages keep content.py order.
     rank = {s: i for i, s in enumerate(FEATURE_ORDER)}
     feats = sorted((p for p in PROJECTS if p['featured']), key=lambda p: rank.get(p['slug'], 99))
-    others = [p for p in PROJECTS if not p['featured']]
+    others = [p for p in PROJECTS if not p['featured'] and not p.get('hidden')]
     o = [head(r, 'Manav Chandaka · Mechanical Engineering & Robotics Hardware',
               'Manav Chandaka: UIUC mechanical engineering student who designs, builds, and tests robot hardware. Suction climbing robot research, the LeKiwi open-source mobile manipulator, and Texas Instruments equipment engineering.',
               ''),
@@ -410,8 +410,10 @@ def block_html(b, r):
 
 def build_project(i, p):
     r = '../'
-    n = len(PROJECTS)
-    prev_p, next_p = PROJECTS[(i - 1) % n], PROJECTS[(i + 1) % n]
+    # Unlisted pages stay reachable by URL but are left out of the prev/next loop.
+    listed = [q for q in PROJECTS if not q.get('hidden')]
+    k = listed.index(p) if p in listed else -1
+    prev_p, next_p = listed[(k - 1) % len(listed)], listed[(k + 1) % len(listed)]
     hero_name, hopts = p['hero']
     o = [head(r, f"{p['title']} · Manav Chandaka", p['objective'], f"projects/{p['slug']}.html",
               og_image=f"assets/img/{hero_name}.webp"),

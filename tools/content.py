@@ -521,7 +521,7 @@ PROJECTS = [
 
   # ------------------------------------------------------------------ tamagotchi
   dict(
-    slug='tamagotchi', featured=False, area='CAD',
+    slug='tamagotchi', featured=False, hidden=True, area='CAD',
     kicker='CAD modeling · Classwork',
     title='Tamagotchi toy model in Fusion 360',
     short='Tamagotchi CAD',
@@ -554,7 +554,6 @@ SLIDES = [
     ('tarc-rocket', 'tarc-rockets', True, 'TARC competition rocket', 'Aerospace · 2023 national finalist from 800+ teams'),
     ('filtration-fan', 'fan-render', True, 'Filtration box fan', 'Product design · HEPA air cleaner for dorm rooms'),
     ('bridge', 'bridge', True, 'IIT bridge building contest', 'Structures · a 22 g balsa truss that held 50+ kg'),
-    ('tamagotchi', 'tamagotchi', True, 'Tamagotchi toy model in Fusion 360', 'Classwork · CAD modeling'),
     ('ti-showerhead', 'ti-producer-faceplate', True, 'AMAT showerhead refurbishment', 'Texas Instruments · in-house tooling, two patent filings'),
 ]
 
@@ -565,6 +564,7 @@ BENCH = [  # (image, caption, crop focus, columns spanned)
     ('bench-lekiwi-hf', 'LeKiwi in the Hugging Face office demo', '50% 85%', 1),
     ('bench-turtlebot', 'TurtleBot3 mapping and navigation experiments', '50% 45%', 2),
     ('bench-koch-act', 'Koch arm running an autonomous ACT policy trained with LeRobot', '50% 45%', 1),
+    ('tamagotchi', 'Tamagotchi toy modeled part by part in Fusion 360: exploded assembly, renders, and drawings', '30% 50%', 1),
 ]
 
 EXPERIENCE = [

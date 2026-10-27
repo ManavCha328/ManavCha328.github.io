@@ -208,9 +208,8 @@ h1,h2,h3,h4{margin:0; font-weight:700; letter-spacing:-.02em; line-height:1.1}
 
 /* ---------- secondary projects ---------- */
 .cards{display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:clamp(28px,3vw,40px) clamp(16px,2vw,28px)}
-.card{grid-column:span 2}
-.card:nth-child(-n+2){grid-column:span 3}
-.card:nth-child(-n+2) .card-media{aspect-ratio:16/10}
+.card{grid-column:span 3}
+.card .card-media{aspect-ratio:16/10}
 .card{display:flex; flex-direction:column; text-decoration:none; color:inherit}
 .card-media{aspect-ratio:4/3; overflow:hidden; border-radius:var(--r); background:var(--paper); margin-bottom:18px; box-shadow:var(--shadow); transition:transform .4s var(--ease)}
 .card:hover .card-media{transform:translateY(-3px)}
@@ -225,14 +224,13 @@ h1,h2,h3,h4{margin:0; font-weight:700; letter-spacing:-.02em; line-height:1.1}
 .card-stat b{color:var(--accent-ink); font-weight:600}
 
 /* ---------- bench: equal cards floating at staggered heights ---------- */
-.float-field{display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:clamp(16px,2vw,28px); align-items:start; padding:8px 0 64px}
+.float-field{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:72px clamp(20px,2.4vw,36px); align-items:start; padding:8px 0 56px}
 .float-item{margin:0; transform:translateY(var(--y,0px))}
-.float-item:nth-child(6n+1){--y:0px;  --d:7.5s}
-.float-item:nth-child(6n+2){--y:56px; --d:8.5s}
-.float-item:nth-child(6n+3){--y:18px; --d:7s}
-.float-item:nth-child(6n+4){--y:68px; --d:9s}
-.float-item:nth-child(6n+5){--y:8px;  --d:8s}
-.float-item:nth-child(6n+6){--y:44px; --d:7.8s}
+.float-item:nth-child(4n+1){--y:0px;  --d:7.5s}
+.float-item:nth-child(4n+2){--y:44px; --d:8.5s}
+.float-item:nth-child(4n+3){--y:14px; --d:7s}
+.float-item:nth-child(4n+4){--y:58px; --d:9s}
+.float-item:nth-child(n+5){margin-left:50%; margin-right:-50%}
 .float-card{display:block; aspect-ratio:3/4; overflow:hidden; border-radius:18px; background:var(--paper);
   box-shadow:0 1px 2px rgba(17,19,21,.06), 0 18px 36px -18px rgba(17,19,21,.35);
   transition:transform .45s var(--ease), box-shadow .45s var(--ease)}
@@ -491,10 +489,11 @@ dialog.lightbox.single .lb-prev, dialog.lightbox.single .lb-next{display:none}
 /* ---------- responsive ---------- */
 @media (max-width: 1000px){
   .float-field{grid-template-columns:repeat(3,minmax(0,1fr)); row-gap:48px}
+  .float-item:nth-child(n+5){margin:0}
   .glance{grid-template-columns:1fr}
   .cs-sec-head{position:static}
   .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .card, .card:nth-child(-n+2){grid-column:auto}
+  .card{grid-column:auto}
   .skills-panel{grid-template-columns:1fr}
   .skills-panel > div + div{border-left:0; border-top:1px solid var(--line)}
   .contact-grid{grid-template-columns:1fr}
