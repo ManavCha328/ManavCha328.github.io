@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>TerraTrek: crank-driven eight-bar walking mechanism · Manav Chandaka</title>
+<meta name="description" content="Turn one continuous hand-crank rotation into a stepping gait that climbs and pushes back a spring-loaded stair rack." />
+<!-- Kept out of search results by choice: anyone with the link can view the site. Remove this line to allow indexing. -->
+<meta name="robots" content="noindex, nofollow" />
+<link rel="canonical" href="https://manavcha328.github.io/projects/terratrek.html" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="TerraTrek: crank-driven eight-bar walking mechanism · Manav Chandaka" />
+<meta property="og:description" content="Turn one continuous hand-crank rotation into a stepping gait that climbs and pushes back a spring-loaded stair rack." />
+<meta property="og:url" content="https://manavcha328.github.io/projects/terratrek.html" />
+<meta property="og:image" content="https://manavcha328.github.io/assets/img/terratrek-prototype.webp" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="theme-color" content="#f4f4f1" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0e0f11" media="(prefers-color-scheme: dark)" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23111315'/%3E%3Cpath d='M7 23V9h3l6 8 6-8h3v14h-3v-9l-6 8-6-8v9z' fill='%23f4f4f1'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
+<link rel="stylesheet" href="../assets/css/site.css" />
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="brand-name">Manav Chandaka</span></a>
+    <button type="button" class="menu-btn" aria-expanded="false" aria-controls="site-nav"><span class="bars" aria-hidden="true"></span>Menu</button>
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <a href="../index.html#work" aria-current="true">Work</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#contact">Contact</a>
+      <a class="btn btn-sm" href="../assets/Manav_Chandaka_Resume.pdf" target="_blank" rel="noopener">Résumé</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<article class="cs">
+<header class="wrap cs-top">
+  <a class="crumb" href="../index.html#work">← All work</a>
+  <p class="eyebrow">Mechanism design · ME 370, UIUC</p>
+  <h1 class="cs-title">TerraTrek: crank-driven eight-bar walking mechanism</h1>
+  <p class="cs-obj">Turn one continuous hand-crank rotation into a stepping gait that climbs and pushes back a spring-loaded stair rack.</p>
+</header>
+<div class="cs-hero">
+  <figure class="m-single" style="--ar:16/9"><div class="frame contain"><a class="lb" href="../assets/img/terratrek-prototype.webp" data-cap="TerraTrek final prototype on a lab bench: black 3D-printed chassis with white eight-bar legs, drive gears, and the hand crank"><img src="../assets/img/terratrek-prototype.webp" width="1200" height="1600" alt="TerraTrek final prototype on a lab bench: black 3D-printed chassis with white eight-bar legs, drive gears, and the hand crank" fetchpriority="high" decoding="async" /></a></div></figure>
+</div>
+<div class="wrap">
+  <section class="glance" aria-label="At a glance"><div><h2>Challenge</h2><p>Turn one crank rotation into a stepping gait that pushes a 2 N spring-loaded stair rack without sliding back.</p></div><div><h2>Approach</h2><p>Two eight-bar legs, 180° out of phase and gear-coupled to one crank, with a hooked, compliant foot.</p></div><div><h2>Outcome</h2><p>Cleared and pushed the stairs with a 23 × 23 × 20 cm all-PLA build that cost $36.81.</p></div></section>
+  <dl class="cs-facts"><div><dt>My role</dt><dd>Team design project</dd></div><div><dt>Timeline</dt><dd>Fall 2026</dd></div><div><dt>Course</dt><dd>ME 370 Mechanical Design I</dd></div><div><dt>Tools</dt><dd>MotionGen, CAD, gear design, 3D printing, gait tracking</dd></div></dl>
+  <dl class="cs-results" aria-label="Key results"><div><dt>Minimum push force against the spring-loaded stairs</dt><dd>2<span> N+</span></dd></div><div><dt>Step height the gait path clears</dt><dd>3.7<span> cm</span></dd></div><div><dt>Total build cost</dt><dd>$36.81</dd></div></dl>
+</div>
+<div class="toc-bar"><nav class="wrap toc" aria-label="On this page"><a href="#challenge"><b>01</b>Problem</a><a href="#approach"><b>02</b>Linkage selection</a><a href="#design"><b>03</b>Two legs, one crank</a><a href="#testing"><b>04</b>Prototype testing</a><a href="#results"><b>05</b>Results</a><a href="#lessons"><b>06</b>Lessons</a></nav></div>
+<section class="wrap cs-sec" id="challenge" aria-labelledby="challenge-h">
+  <div class="cs-sec-grid">
+    <div class="cs-sec-head"><span class="num">01</span><h2 id="challenge-h">Problem</h2></div>
+    <div class="prose"><p class="lead">Turn one continuous hand-crank rotation into a repeated stepping motion that pushes back a spring-loaded stair rack.</p><ul><li>Clear stairs <b>3.7 ± 0.3 cm</b> tall and 8 cm long, then push with a flat, horizontal stroke instead of slipping</li><li>Deliver at least <b>2 N</b> of horizontal force without letting the rack slide back</li><li>Fit inside a <b>24 × 24 × 24 cm</b> box</li></ul></div>
+  </div>
+  <div class="blocks"><figure class="fig m-video"><div class="vid"><div class="vframe"><video controls playsinline preload="none" width="1100" height="578" poster="../assets/img/terratrek-cad-walk-poster.webp" aria-label="The final design, walking"><source src="../assets/video/terratrek-cad-walk.mp4" type="video/mp4" /></video></div><div class="spec"><h3>The final design, walking</h3><p>The final CAD assembly driven from the crank: both legs step over the stairs, land, and push the rack back.</p><dl><div><dt>Model</dt><dd>Final CAD assembly</dd></div><div><dt>Shows</dt><dd>Both legs stepping and pushing the rack</dd></div><div><dt>Length</dt><dd>0:08, silent</dd></div></dl></div></div><figcaption class="figcap"><span>CAD animation of the final design walking along the stair rack.</span></figcaption></figure></div>
+</section>
+<section class="wrap cs-sec" id="approach" aria-labelledby="approach-h">
+  <div class="cs-sec-grid">
+    <div class="cs-sec-head"><span class="num">02</span><h2 id="approach-h">Linkage selection</h2></div>
+    <div class="prose"><p>We picked an <b>eight-bar linkage</b> with a Pugh matrix over Watt I and double-slider alternatives, because its foot path can be reshaped by changing link lengths.</p><p>The first linkage’s gait was too short to clear the step. A 10-bar version with a <b>pantograph</b> gave a much taller path but risked sharp acceleration cusps. An eight-bar with an <b>extended foot</b> cleared the step without adding cusps, so we chose that.</p></div>
+  </div>
+  <div class="blocks"><figure class="fig m-seq" style="--n:3;--ar:1/1"><div class="steps"><div class="step"><div class="frame contain"><a class="lb" href="../assets/img/terratrek-sim-path.webp" data-cap="Moderate-fidelity 8-bar"><img src="../assets/img/terratrek-sim-path.webp" width="873" height="897" alt="MotionGen simulation of the eight-bar linkage with the simulated foot gait path traced in red" loading="lazy" decoding="async" /></a></div><p class="step-lab">Moderate-fidelity 8-bar</p></div><div class="step"><div class="frame contain"><a class="lb" href="../assets/img/terratrek-linkage-pantograph.webp" data-cap="10-bar with pantograph"><img src="../assets/img/terratrek-linkage-pantograph.webp" width="986" height="1048" alt="MotionGen model of the 10-bar linkage with a pantograph added below the leg, foot path traced in red" loading="lazy" decoding="async" /></a></div><p class="step-lab">10-bar with pantograph</p></div><div class="step"><div class="frame contain"><a class="lb" href="../assets/img/terratrek-linkage-foot.webp" data-cap="8-bar with foot · chosen"><img src="../assets/img/terratrek-linkage-foot.webp" width="993" height="1029" alt="MotionGen model of the eight-bar linkage with an extended foot, foot path traced in red" loading="lazy" decoding="async" /></a></div><p class="step-lab">8-bar with foot · chosen</p></div></div><figcaption class="figcap"><span>Linkage variants in MotionGen, with the foot path traced in red.</span></figcaption></figure></div>
+</section>
+<section class="wrap cs-sec" id="design" aria-labelledby="design-h">
+  <div class="cs-sec-grid">
+    <div class="cs-sec-head"><span class="num">03</span><h2 id="design-h">Two legs, one crank</h2></div>
+    <div class="prose"><p>Two legs run <b>180° out of phase</b>, so their duty cycles overlap and at least one foot is always on the stairs: no backsliding. Two small gears on one drive shaft each drive a leg through a larger gear, which multiplies torque, and a <b>coupler link</b> between the legs holds the phase. The foot is hooked because the leg rotates after it contacts the stair.</p></div>
+  </div>
+  <div class="blocks"><figure class="fig m-compare" style="--ar:4/5"><div class="pair"><div><div class="frame contain"><span class="tag">CAD</span><a class="lb" href="../assets/img/terratrek-cad-v2.webp" data-cap="Final design over the stair rack"><img src="../assets/img/terratrek-cad-v2.webp" width="931" height="1030" alt="Final TerraTrek CAD over the wooden stair rack" loading="lazy" decoding="async" /></a></div><p class="sub">Final design over the stair rack</p></div><div><div class="frame contain"><span class="tag">Hardware</span><a class="lb" href="../assets/img/terratrek-prototype.webp" data-cap="The final prototype: two eight-bar legs in a 3D-printed chassis"><img src="../assets/img/terratrek-prototype.webp" width="1200" height="1600" alt="TerraTrek final prototype on a lab bench: black 3D-printed chassis with white eight-bar legs, drive gears, and the hand crank" loading="lazy" decoding="async" /></a></div><p class="sub">The final prototype: two eight-bar legs in a 3D-printed chassis</p></div></div><figcaption class="figcap"><span>The final design and the built prototype.</span></figcaption></figure><figure class="fig m-single" style="--ar:1448/1086"><div class="frame contain"><a class="lb" href="../assets/img/terratrek-gear-drive.webp" data-cap="Gear-coupled two-leg drive inside the chassis: input crank and the two large gears on one drive shaft."><img src="../assets/img/terratrek-gear-drive.webp" width="1448" height="1086" alt="CAD top view of the chassis: input crank and the two large gears coupling both legs to the single drive shaft" loading="lazy" decoding="async" /></a></div><figcaption class="figcap"><span>Gear-coupled two-leg drive inside the chassis: input crank and the two large gears on one drive shaft.</span></figcaption></figure><figure class="fig m-compare" style="--ar:1/1"><div class="pair"><div><div class="frame contain pad"><span class="tag">Packaging</span><a class="lb" href="../assets/img/terratrek-packaging-front.webp" data-cap="Front view: leg spacing and side openings for full link rotation"><img src="../assets/img/terratrek-packaging-front.webp" width="1099" height="1190" alt="Front CAD view of the TerraTrek chassis showing both legs and the side openings" loading="lazy" decoding="async" /></a></div><p class="sub">Front view: leg spacing and side openings for full link rotation</p></div><div><div class="frame contain pad"><span class="tag">Size check</span><a class="lb" href="../assets/img/terratrek-size-check.webp" data-cap="Bounding-box check against the 24 cm limit"><img src="../assets/img/terratrek-size-check.webp" width="805" height="987" alt="CAD bounding-box check of the TerraTrek assembly over the stair rack" loading="lazy" decoding="async" /></a></div><p class="sub">Bounding-box check against the 24 cm limit</p></div></div><figcaption class="figcap"><span>Packaging the mechanism inside the size limit.</span></figcaption></figure></div>
+</section>
+<section class="wrap cs-sec" id="testing" aria-labelledby="testing-h">
+  <div class="cs-sec-grid">
+    <div class="cs-sec-head"><span class="num">04</span><h2 id="testing-h">Prototype testing</h2></div>
+    <div class="prose"><p>The CAD pushed the stairs, but the first print didn’t: joint friction was high at points along the path, and the foot barely cleared the stair or hit its top.</p><ul><li>A missing clearance at the bottom joint of the largest link caused a <b>collision that flattened the gait</b>; we cut away the colliding material</li><li>No off-the-shelf bearing fit our shafts, so we designed <b>custom flange ball bearings</b>: printed races and retainer with 4 mm steel balls</li><li>A <b>compliant foot joint</b> lets the foot recover from hitting the top of a stair and flex over it</li></ul></div>
+  </div>
+  <div class="blocks"><figure class="fig m-compare" style="--ar:1/1"><div class="pair"><div><div class="frame"><span class="tag">Failure</span><a class="lb" href="../assets/img/terratrek-proto-issue.webp" data-cap="First prototype: the foot catching on the stair"><img src="../assets/img/terratrek-proto-issue.webp" width="1098" height="1187" alt="Close-up of the first TerraTrek prototype with the foot catching on a stair" loading="lazy" decoding="async" /></a></div><p class="sub">First prototype: the foot catching on the stair</p></div><div><div class="frame"><span class="tag">Testing</span><a class="lb" href="../assets/img/terratrek-proto-testing.webp" data-cap="The prototype on the bench during testing"><img src="../assets/img/terratrek-proto-testing.webp" width="1280" height="960" alt="TerraTrek prototype with black frame and white printed legs on a classroom bench" loading="lazy" decoding="async" /></a></div><p class="sub">The prototype on the bench during testing</p></div></div><figcaption class="figcap"><span>Testing the printed prototype.</span></figcaption></figure><figure class="fig m-compare" style="--ar:4/3"><div class="pair"><div><div class="frame"><span class="tag">CAD</span><a class="lb" href="../assets/img/terratrek-bearing-cad.webp" data-cap="Custom flange ball bearing"><img src="../assets/img/terratrek-bearing-cad.webp" width="1011" height="849" alt="CAD of the custom flange ball bearing: printed races with the ball pockets around the ring" loading="lazy" decoding="async" /></a></div><p class="sub">Custom flange ball bearing</p></div><div><div class="frame"><span class="tag">Hardware</span><a class="lb" href="../assets/img/terratrek-bearing.webp" data-cap="The printed bearing with its 4 mm steel balls"><img src="../assets/img/terratrek-bearing.webp" width="1500" height="1125" alt="The finished 3D-printed ball bearing held in a hand, 4 mm steel balls seated in the printed races" loading="lazy" decoding="async" /></a></div><p class="sub">The printed bearing with its 4 mm steel balls</p></div></div><figcaption class="figcap"><span>Custom bearing, from CAD to hardware.</span></figcaption></figure><figure class="fig m-video portrait"><div class="vid"><div class="vframe"><video controls playsinline preload="none" width="406" height="720" poster="../assets/img/terratrek-gait-poster.webp" aria-label="Gait on the prototype"><source src="../assets/video/terratrek-gait.mp4" type="video/mp4" /></video></div><div class="spec"><h3>Gait on the prototype</h3><p>One continuous crank rotation drives the eight-bar leg through its full stepping cycle.</p><dl><div><dt>Drive</dt><dd>Hand crank, gear-coupled</dd></div><div><dt>Shows</dt><dd>One leg’s full gait cycle</dd></div><div><dt>Length</dt><dd>0:12, silent</dd></div></dl></div></div><figcaption class="figcap"><span>The leg linkage on the final prototype, driven by hand at the crank.</span></figcaption></figure><figure class="fig m-compare" style="--ar:1/1"><div class="pair"><div><div class="frame contain"><span class="tag">Simulated</span><a class="lb" href="../assets/img/terratrek-sim-path.webp" data-cap="Gait path in MotionGen"><img src="../assets/img/terratrek-sim-path.webp" width="873" height="897" alt="MotionGen simulation of the eight-bar linkage with the simulated foot gait path traced in red" loading="lazy" decoding="async" /></a></div><p class="sub">Gait path in MotionGen</p></div><div><div class="frame contain"><span class="tag">Measured</span><a class="lb" href="../assets/img/terratrek-tracked-path.webp" data-cap="Video-tracked gait path of the prototype"><img src="../assets/img/terratrek-tracked-path.webp" width="1448" height="1086" alt="Video-tracked gait path of the physical prototype, a yellow loop traced against a black background" loading="lazy" decoding="async" /></a></div><p class="sub">Video-tracked gait path of the prototype</p></div></div><figcaption class="figcap"><span>Simulated vs. measured gait path.</span></figcaption></figure></div>
+</section>
+<section class="wrap cs-sec" id="results" aria-labelledby="results-h">
+  <div class="cs-sec-grid">
+    <div class="cs-sec-head"><span class="num">05</span><h2 id="results-h">Results</h2></div>
+    <div class="prose"><ul><li>Cleared and pushed the stair rack, meeting the design requirement, with at least <b>2 N</b> of push force and no backsliding</li><li>All-PLA build with Plastite-screw assembly</li><li>Final CAD at ≈23 × 23 × 20 cm inside the 24 cm box</li><li><b>$36.81</b> total build cost</li></ul></div>
+  </div>
+  
+</section>
+<section class="wrap cs-sec" id="lessons" aria-labelledby="lessons-h">
+  <div class="cs-sec-grid">
+    <div class="cs-sec-head"><span class="num">06</span><h2 id="lessons-h">Lessons</h2></div>
+    <div class="prose"><ul><li>Design in <b>extra gait height</b>: tolerance errors and play in 3D-printed joints compound into a real loss of height compared to simulation</li><li>Rubber bands gave an inconsistent restoring force at the foot joint; a <b>spring</b> would be more predictable</li><li>The next version needs a leg without the extra degree of freedom that can still carry load without compromising the gait path</li></ul></div>
+  </div>
+  
+</section>
+<div class="wrap"><aside class="cs-cta" aria-label="Get in touch">
+  <p>Want to talk through this project?<span>I’m happy to go deeper on the design decisions and testing.</span></p>
+  <div><a class="btn primary" href="mailto:manavcha328@gmail.com">Email me</a><a class="btn" href="../assets/Manav_Chandaka_Resume.pdf" target="_blank" rel="noopener">Résumé (PDF)</a></div>
+</aside></div>
+<nav class="wrap cs-next" aria-label="More projects"><div class="cs-next-grid"><a href="ti-showerhead.html"><span class="thumb"><img src="../assets/img/ti-producer-faceplate.webp" width="1200" height="1200" alt="Applied Materials Producer 300 mm showerhead faceplate: a machined aluminum ring around a dense field of gas holes" loading="lazy" decoding="async" /></span><span><span class="dir">← Previous</span><span class="ttl">In-house showerhead refurbishment tooling</span></span></a><a href="fsae-brakes.html"><span class="thumb"><img src="../assets/img/fsae-brakes-car.webp" width="380" height="515" alt="Brake lines and orange suspension hardware installed on the Illini Electric Motorsports Formula SAE car" loading="lazy" decoding="async" /></span><span><span class="dir">Next →</span><span class="ttl">Brake system hardware for an electric Formula SAE car</span></span></a></div></nav>
+</article>
+</main>
+<footer class="site-footer">
+  <div class="wrap foot">
+    <span>© 2026 Manav Chandaka</span>
+    <span class="sp"></span>
+    <a href="mailto:manavcha328@gmail.com">manavcha328@gmail.com</a>
+    <a href="tel:+16303101851">(630) 310-1851</a>
+    <a href="https://www.linkedin.com/in/manavchandaka/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://github.com/SIGRobotics-UIUC/LeKiwi" target="_blank" rel="noopener nofollow">GitHub</a>
+    <a href="../assets/Manav_Chandaka_Resume.pdf" target="_blank" rel="noopener">Résumé</a>
+  </div>
+</footer>
+<dialog class="lightbox" id="lightbox" aria-label="Image viewer">
+  <div class="lb-stage">
+    <div class="lb-top"><span class="lb-count"></span><button type="button" class="lb-btn lb-close" aria-label="Close viewer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+    <div class="lb-img-wrap">
+      <button type="button" class="lb-btn lb-prev" aria-label="Previous image"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <img alt="" />
+      <button type="button" class="lb-btn lb-next" aria-label="Next image"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+    </div>
+    <p class="lb-cap"></p>
+  </div>
+</dialog>
+<script src="../assets/js/site.js" defer></script>
+</body>
+</html>
