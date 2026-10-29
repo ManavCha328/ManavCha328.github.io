@@ -153,11 +153,11 @@ def feature_media(p, r):
                 f'</div></div>')
     badge = f'<span class="badge">{p["tile_badge"]}</span>' if p.get('tile_badge') else ''
     if s == 'climbing-robot':
-        # The robot beside its chain drive running: suction cups riding the track.
-        return (f'<div class="feature-media"><span class="badge live">Chain drive running</span><div class="split photo-clip">'
+        # The robot beside its climbing test: attached as the panel tilts to vertical.
+        return (f'<div class="feature-media"><span class="badge live">Climbing test</span><div class="split photo-clip">'
                 f'{img(r, "climber-robot")}'
-                f'<video data-loop muted loop playsinline preload="none" poster="{r}assets/img/climber-chain-drive-poster.webp" '
-                f'aria-label="Top view of the climbing robot chain drive carrying the suction cups around"><source src="{r}assets/video/climber-chain-drive.mp4" type="video/mp4" /></video>'
+                f'<video data-loop muted loop playsinline preload="none" poster="{r}assets/img/climber-climb-poster.webp" '
+                f'aria-label="The climbing robot holding onto a panel as it is tilted to vertical, then climbing it"><source src="{r}assets/video/climber-climb.mp4" type="video/mp4" /></video>'
                 f'</div></div>')
     return f'<div class="feature-media">{badge}{img(r, p["tile"])}</div>'
 
