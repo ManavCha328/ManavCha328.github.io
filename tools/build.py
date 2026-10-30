@@ -18,6 +18,10 @@ SHOW_PLACEHOLDERS = True
 SITE = 'https://manavcha328.github.io/'
 EMAIL = 'manavcha328@gmail.com'
 FEATURE_ORDER = ['climbing-robot', 'lekiwi', 'ti-showerhead', 'terratrek']
+# Page-view stats via GoatCounter (free, no cookies). Set this to your site
+# code, e.g. 'manavchandaka' for manavchandaka.goatcounter.com, and rebuild.
+# Leave empty to turn tracking off.
+GOATCOUNTER = ''
 PHONE = '(630) 310-1851'
 PHONE_TEL = '+16303101851'
 LINKEDIN = 'https://www.linkedin.com/in/manavchandaka/'
@@ -111,6 +115,10 @@ LIGHTBOX = '''<dialog class="lightbox" id="lightbox" aria-label="Image viewer">
 </dialog>
 '''
 
+ANALYTICS = (f'<script data-goatcounter="https://{GOATCOUNTER}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>'
+             if GOATCOUNTER else '')
+
+
 def footer(r, dark=False):
     return f'''<footer class="site-footer">
   <div class="wrap foot">
@@ -124,6 +132,7 @@ def footer(r, dark=False):
   </div>
 </footer>
 {LIGHTBOX}<script src="{r}assets/js/site.js" defer></script>
+{ANALYTICS}
 </body>
 </html>
 '''
@@ -372,6 +381,12 @@ def block_html(b, r):
                 f'width="{w}" height="{h}" poster="{r}assets/img/{poster}.webp" aria-label="{esc(title)}">'
                 f'<source src="{r}assets/video/{vid}.mp4" type="video/mp4" /></video></div>'
                 f'<div class="spec"><h3>{esc(title)}</h3><p>{esc(text)}</p><dl>{dl}</dl></div></div>{figcap(cap)}</figure>')
+    if kind == 'loop':
+        # A short animation that plays on its own while in view (muted, looping).
+        _, v, cap, opts = b
+        return (f'<figure class="fig m-single{" narrow" if opts.get("narrow") else ""}"{frame_style(opts)}><div class="frame loop-frame">'
+                f'<video data-loop muted loop playsinline preload="metadata" poster="{r}assets/img/{v}-poster.webp" aria-label="{esc(strip_tags(cap))}">'
+                f'<source src="{r}assets/video/{v}.mp4" type="video/mp4" /></video></div>{figcap(cap)}</figure>')
     if kind == 'clips':
         # Short silent clips side by side, each with its own controls.
         _, items, cap = b
@@ -427,7 +442,15 @@ def build_project(i, p):
 ''')
     badge = f'<span class="tag">{esc(hopts["badge"])}</span>' if hopts.get('badge') else ''
     bg = ' style="background:#fff"' if hero_name == 'climber-robot' else ''
-    o.append(f'''<div class="cs-hero">
+    if p.get('hero_clip'):
+        # Photo beside a muted clip that plays on its own while in view.
+        clip = p['hero_clip']
+        o.append(f'''<div class="cs-hero">
+  <figure class="m-single"><div class="frame hero-split"><span class="tag">Climbing test</span>{lb(r, hero_name, img(r, hero_name, eager=True), ALT.get(hero_name, ''))}<video data-loop muted loop playsinline preload="metadata" poster="{r}assets/img/{clip}-poster.webp" aria-label="{esc(ALT.get(clip, 'Project video'))}"><source src="{r}assets/video/{clip}.mp4" type="video/mp4" /></video></div></figure>
+</div>
+''')
+    else:
+        o.append(f'''<div class="cs-hero">
   <figure class="m-single" style="--ar:{hopts.get('ar', '16/9')}"><div class="{frame_cls(hopts)}"{bg}>{badge}{lb(r, hero_name, img(r, hero_name, eager=True), ALT.get(hero_name, ''))}</div></figure>
 </div>
 ''')

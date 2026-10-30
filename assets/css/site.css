@@ -304,6 +304,9 @@ body[data-home] .site-footer{background:var(--plate); color:var(--plate-muted); 
 .cs-hero{max-width:calc(var(--max) + 160px); margin:0 auto; padding:0 var(--gutter)}
 .cs-hero figure{margin:0}
 .cs-hero .frame{max-height:min(68vh,720px); box-shadow:var(--shadow)}
+.hero-split{display:grid; grid-template-columns:3fr 2fr; gap:6px; aspect-ratio:16/9; background:var(--paper)}
+.hero-split > a, .hero-split > a img, .hero-split > video{width:100%; height:100%; object-fit:cover; display:block; min-height:0}
+.loop-frame video{width:100%; height:100%; object-fit:contain; display:block; background:#fff}
 .cs-hero.portrait .frame{aspect-ratio:16/9}
 .cs-facts{
   display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:0; margin:clamp(32px,4vw,48px) 0 0;
