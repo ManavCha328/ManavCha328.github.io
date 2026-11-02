@@ -21,7 +21,7 @@ FEATURE_ORDER = ['climbing-robot', 'lekiwi', 'ti-showerhead', 'terratrek']
 # Page-view stats via GoatCounter (free, no cookies). Set this to your site
 # code, e.g. 'manavchandaka' for manavchandaka.goatcounter.com, and rebuild.
 # Leave empty to turn tracking off.
-GOATCOUNTER = ''
+GOATCOUNTER = 'manavcha328'
 PHONE = '(630) 310-1851'
 PHONE_TEL = '+16303101851'
 LINKEDIN = 'https://www.linkedin.com/in/manavchandaka/'
