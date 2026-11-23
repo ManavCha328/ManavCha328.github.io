@@ -440,11 +440,15 @@ def build_project(i, p):
     o = [head(r, f"{p['title']} · Manav Chandaka", p['objective'], f"projects/{p['slug']}.html",
               og_image=f"assets/img/{hero_name}.webp"),
          '</head>\n<body>\n', header(r, False), '<main id="main">\n<article class="cs">\n']
+    top_links = ''
+    if p.get('links_top') and p['links']:
+        tl = ''.join(f'<a class="btn" href="{esc(h)}" target="_blank" rel="noopener{" nofollow" if "github.com" in h else ""}">{esc(t)} {EXT}</a>' for h, t in p['links'])
+        top_links = f'\n  <div class="cs-links cs-links-top">{tl}</div>'
     o.append(f'''<header class="wrap cs-top">
   <a class="crumb" href="../index.html#work">← All work</a>
   <p class="eyebrow">{esc(p['kicker'])}</p>
   <h1 class="cs-title">{esc(p['title'])}</h1>
-  <p class="cs-obj">{esc(p['objective'])}</p>
+  <p class="cs-obj">{esc(p['objective'])}</p>{top_links}
 </header>
 ''')
     badge = f'<span class="tag">{esc(hopts["badge"])}</span>' if hopts.get('badge') else ''

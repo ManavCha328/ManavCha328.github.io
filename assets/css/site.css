@@ -454,6 +454,7 @@ body{counter-reset:fig}
 
 /* ---------- links + next project ---------- */
 .cs-links{display:flex; flex-wrap:wrap; gap:10px; margin-top:28px}
+.cs-links-top{margin-top:22px}
 .cs-cta{margin-top:clamp(56px,7vw,88px); display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;
   padding:22px 26px; border:1px solid var(--line); border-radius:var(--r); background:var(--surface)}
 .cs-cta p{margin:0; font-size:17px; font-weight:600; letter-spacing:-.01em}

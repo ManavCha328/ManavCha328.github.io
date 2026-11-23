@@ -281,6 +281,7 @@ PROJECTS = [
                              ('lekiwi-arm-and-base', 'SO-ARM leader arm next to LeKiwi for teleoperation')],
                  'LeKiwi in use.', {'cols': 3, 'ar': '3/4'})]),
     ],
+    links_top=True,
     links=[('https://github.com/SIGRobotics-UIUC/LeKiwi', 'GitHub repo'),
            ('https://huggingface.co/docs/lerobot/lekiwi', 'LeRobot docs')],
   ),
