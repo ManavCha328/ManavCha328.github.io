@@ -360,6 +360,20 @@ def block_html(b, r):
                         f'<p class="sub">{esc(sub)}</p></div>' for n, lab, sub in pair)
         size = ' narrow' if opts.get('narrow') else ' small' if opts.get('small') else ''
         return f'<figure class="fig m-compare{size}"{frame_style(opts)}><div class="pair">{cells}</div>{figcap(cap)}</figure>'
+    if kind == 'reel':
+        # Demo videos as one tile block: a tall clip on the left, two wide clips stacked on the right.
+        _, tiles, cap = b
+        cells = ''
+        for t in tiles:
+            tag = f'<span class="tag">{esc(t["tag"])}</span>'
+            if t.get('embed'):
+                cells += (f'<div class="tile">{tag}<div class="stream" data-embed="{esc(t["embed"])}" data-title="{esc(t["label"])}">'
+                          f'<button type="button"><span class="play" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>'
+                          f'{esc(t["label"])}<small>Loads a Google Drive player</small></button></div></div>')
+            else:
+                cells += (f'<div class="tile">{tag}<video controls playsinline preload="none" poster="{r}assets/img/{t["poster"]}.webp" '
+                          f'aria-label="{esc(t["label"])}"><source src="{r}assets/video/{t["video"]}.mp4" type="video/mp4" /></video></div>')
+        return f'<figure class="fig m-reel"><div class="reel">{cells}</div>{figcap(cap)}</figure>'
     if kind == 'row':
         # Images side by side at one shared height: each column is sized to its image's shape.
         _, items, cap, opts = b
@@ -462,19 +476,7 @@ def build_project(i, p):
 ''')
     badge = f'<span class="tag">{esc(hopts["badge"])}</span>' if hopts.get('badge') else ''
     bg = ' style="background:#fff"' if hero_name == 'climber-robot' else ''
-    if p.get('hero_videos'):
-        # Demo loops side by side, each column sized to its clip's shape so all share one height.
-        cells, cols = '', []
-        for v, poster, tag, w, h, label in p['hero_videos']:
-            cols.append(f'{w / h:.3f}fr')
-            cells += (f'<div class="hv" style="--a:{w}/{h}"><span class="tag">{esc(tag)}</span><video data-loop muted loop playsinline preload="metadata" '
-                      f'poster="{r}assets/img/{poster}.webp" aria-label="{esc(label)}"><source src="{r}assets/video/{v}.mp4" type="video/mp4" /></video></div>')
-        ar = sum(w / h for _, _, _, w, h, _ in p['hero_videos'])
-        o.append(f'''<div class="cs-hero">
-  <figure class="m-single"><div class="hero-vids" style="grid-template-columns:{' '.join(cols)};--ar:{ar:.3f}">{cells}</div></figure>
-</div>
-''')
-    elif p.get('hero_clip'):
+    if p.get('hero_clip'):
         # Photo beside a muted clip that plays on its own while in view.
         clip = p['hero_clip']
         o.append(f'''<div class="cs-hero">

@@ -119,6 +119,7 @@ ALT = {
     'lekiwi-guide-top-plate': 'Top plate from above with the Raspberry Pi case and the arm base mounted',
     'lekiwi-guide-final': 'Fully assembled LeKiwi on a table: arm folded over the two-plate omni-wheel base',
     'gb-val-wall': 'Suction module holding onto a textured wall, a hand held below it not touching',
+    'lekiwi-loop': 'LeKiwi V2 driving up to an object and picking it up, in real time',
     'headshot': 'Portrait of Manav Chandaka',
     'lekiwi-v2-demo-poster': 'Dynamixel LeKiwi (V2) demo run',
     'lekiwi-loop-poster': 'LeKiwi V2 picking up an object',
@@ -241,9 +242,8 @@ PROJECTS = [
              ('<$500', '', 'Total bill of materials'),
              ('$40K', '+', 'Corporate sponsorship secured')],
     home_metrics=[('1,480+', 'GitHub stars'), ('<$500', 'Total BOM'), ('$40K+', 'Sponsorship')],
-    hero=('lekiwi-v1-real', {'ar': '16/9'}),
-    hero_videos=[('lekiwi-loop', 'lekiwi-loop-poster', 'Real-time demo', 448, 710, 'LeKiwi V2 driving up to an object and picking it up'),
-                 ('lekiwi-community-demo', 'lekiwi-community-poster', 'Community build', 1280, 714, 'A community-built LeKiwi driving through the Hugging Face office')],
+    hero=('lekiwi-v1-real', {'ar': '16/9', 'badge': 'LeKiwi', 'clip_badge': 'Real-time demo'}),
+    hero_clip='lekiwi-loop',
     tile='lekiwi-robot',
     sections=[
       dict(id='challenge', title='Problem', body=[
@@ -275,13 +275,10 @@ PROJECTS = [
                  'Documentation from the LeKiwi assembly guide on GitHub.', {'cols': 4, 'ar': '1/1'})]),
       dict(id='testing', title='Testing', body=[
         ('p', 'Validated in <b>MuJoCo simulation and on hardware</b>: kinematics, control response, and sensor and actuator integration.')],
-        blocks=[('video', 'lekiwi-v2-demo', 'lekiwi-v2-demo-poster', 'Dynamixel LeKiwi (V2) demo run.',
-                 'V2 demo run', 'The Dynamixel-based V2 drives across the floor and picks up objects with its arm. The footage is unedited and plays in real time.',
-                 [('Build', 'LeKiwi V2, Dynamixel servos'), ('Shows', 'Holonomic driving, arm grasping'), ('Length', '1:00, with sound')],
-                 {'portrait': True}),
-                ('stream', 'https://drive.google.com/file/d/1PbPzd4VbM2CX7gkqXLyjAmToNDPtoq7_/preview',
-                 'https://drive.google.com/file/d/1PbPzd4VbM2CX7gkqXLyjAmToNDPtoq7_/view?usp=sharing',
-                 'Teleoperation data collection')]),
+        blocks=[('reel', [dict(video='lekiwi-v2-demo', poster='lekiwi-v2-demo-poster', tag='V2 demo · real time', label='Dynamixel LeKiwi (V2) driving and picking up objects, unedited, with sound'),
+                          dict(video='lekiwi-community-demo', poster='lekiwi-community-poster', tag='Community build · Hugging Face', label='A community-built LeKiwi driving through the Hugging Face office, with sound'),
+                          dict(embed='https://drive.google.com/file/d/1PbPzd4VbM2CX7gkqXLyjAmToNDPtoq7_/preview', tag='Teleoperation', label='Teleoperation data collection')],
+                 'Demo videos: the V2 robot driving and grasping in real time, a community build at Hugging Face, and teleoperated data collection.')]),
       dict(id='results', title='Results', body=[
         ('ul', ['<b>1,480+ GitHub stars, 160+ forks, and 100s of community builds</b>',
                 'An <b>official platform</b> in Hugging Face’s LeRobot ecosystem',

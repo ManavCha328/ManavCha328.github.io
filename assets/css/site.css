@@ -564,16 +564,20 @@ dialog.lightbox.single .lb-prev, dialog.lightbox.single .lb-next{display:none}
 .m-side .gcap{font-size:13.5px; color:var(--ink-2); margin:8px 0 0; line-height:1.45}
 @media (max-width: 720px){ .m-side .side-grid{grid-template-columns:1fr} }
 
-/* Demo loops side by side in a case-study header */
-.hero-vids{display:grid; gap:6px; aspect-ratio:var(--ar); max-height:min(68vh,720px); margin:0 auto}
-.hero-vids .hv{position:relative; overflow:hidden; border-radius:var(--r); background:#000; box-shadow:var(--shadow); min-width:0}
-.hero-vids video{width:100%; height:100%; object-fit:cover; display:block}
-@media (max-width: 720px){
-  .hero-vids{grid-template-columns:1fr !important; aspect-ratio:auto; max-height:none}
-  .hero-vids .hv{aspect-ratio:var(--a)}
-  .hero-vids .hv:first-child{max-height:70vh}
-}
 .m-compare.small{max-width:520px}
 .m-row .row-grid{display:grid; gap:10px; align-items:start}
 .m-row .gcap{font-size:13.5px; color:var(--ink-2); margin:8px 0 0; line-height:1.45}
 @media (max-width: 720px){ .m-row .row-grid{grid-template-columns:1fr !important} }
+
+/* Demo reel: one tall clip beside two stacked wide clips, no dead space */
+.m-reel .reel{display:grid; grid-template-columns:0.631fr 0.889fr; grid-template-rows:1fr 1fr; gap:10px; aspect-ratio:1.52}
+.m-reel .tile{position:relative; overflow:hidden; border-radius:var(--r); background:#000; min-width:0; min-height:0}
+.m-reel .tile:first-child{grid-row:1 / 3}
+.m-reel .tile video{width:100%; height:100%; object-fit:cover; display:block; background:#000}
+.m-reel .tile .stream{aspect-ratio:auto; height:100%; border-radius:0}
+.m-reel .tile .stream button{font-size:15px}
+@media (max-width: 720px){
+  .m-reel .reel{grid-template-columns:1fr; grid-template-rows:none; aspect-ratio:auto}
+  .m-reel .tile:first-child{grid-row:auto; aspect-ratio:448/710; max-height:70vh}
+  .m-reel .tile{aspect-ratio:16/9}
+}
