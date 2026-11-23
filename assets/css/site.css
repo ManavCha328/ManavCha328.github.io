@@ -306,6 +306,7 @@ body[data-home] .site-footer{background:var(--plate); color:var(--plate-muted); 
 .cs-hero .frame{max-height:min(68vh,720px); box-shadow:var(--shadow)}
 .hero-split{display:grid; grid-template-columns:3fr 2fr; gap:6px; aspect-ratio:16/9; background:var(--paper)}
 .hero-split > a, .hero-split > a img, .hero-split > video{width:100%; height:100%; object-fit:cover; display:block; min-height:0}
+.hero-split .tag-clip{left:calc(60% + 13px)}
 .loop-frame video{width:100%; height:100%; object-fit:contain; display:block; background:#fff}
 .cs-hero.portrait .frame{aspect-ratio:16/9}
 .cs-facts{
@@ -387,6 +388,7 @@ body{counter-reset:fig}
 .m-single.natural .frame img{height:auto}
 .m-single.narrow{max-width:880px}
 .m-single.small{max-width:520px}
+.m-compare.narrow{max-width:720px}
 /* 2. compare: two images side by side, labelled (e.g. CAD | Hardware) */
 .m-compare .pair{display:grid; grid-template-columns:1fr 1fr; gap:10px}
 .m-compare .frame{aspect-ratio:var(--ar,4/3)}
@@ -553,3 +555,10 @@ dialog.lightbox.single .lb-prev, dialog.lightbox.single .lb-next{display:none}
 .m-table th:first-child{padding-left:12px}
 .prose-inset{margin-left:calc(33.333% + 8px)}
 @media (max-width: 720px){ .prose-inset{margin-left:0} }
+
+/* Text beside a looping clip */
+.m-side .side-grid{display:grid; grid-template-columns:minmax(0,5fr) minmax(0,7fr); gap:clamp(20px,3vw,40px); align-items:center}
+.m-side .prose h3{font-size:22px; letter-spacing:-.02em; margin:0 0 10px}
+.m-side .frame{aspect-ratio:var(--ar,16/9); box-shadow:var(--shadow)}
+.m-side .gcap{font-size:13.5px; color:var(--ink-2); margin:8px 0 0; line-height:1.45}
+@media (max-width: 720px){ .m-side .side-grid{grid-template-columns:1fr} }

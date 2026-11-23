@@ -358,7 +358,7 @@ def block_html(b, r):
         _, pair, cap, opts = b
         cells = ''.join(f'<div><div class="{frame_cls(opts)}"><span class="tag">{esc(lab)}</span>{lb(r, n, img(r, n), sub)}</div>'
                         f'<p class="sub">{esc(sub)}</p></div>' for n, lab, sub in pair)
-        return f'<figure class="fig m-compare"{frame_style(opts)}><div class="pair">{cells}</div>{figcap(cap)}</figure>'
+        return f'<figure class="fig m-compare{" narrow" if opts.get("narrow") else ""}"{frame_style(opts)}><div class="pair">{cells}</div>{figcap(cap)}</figure>'
     if kind == 'sequence':
         _, steps, cap, opts = b
         cells = ''.join(f'<div class="step"><div class="{frame_cls(opts)}">{lb(r, n, img(r, n), lab)}</div>'
@@ -387,6 +387,13 @@ def block_html(b, r):
         return (f'<figure class="fig m-single{" narrow" if opts.get("narrow") else ""}"{frame_style(opts)}><div class="frame loop-frame">'
                 f'<video data-loop muted loop playsinline preload="metadata" poster="{r}assets/img/{v}-poster.webp" aria-label="{esc(strip_tags(cap))}">'
                 f'<source src="{r}assets/video/{v}.mp4" type="video/mp4" /></video></div>{figcap(cap)}</figure>')
+    if kind == 'side':
+        # Text on the left, a looping silent clip on the right (stacks on phones).
+        _, items, v, cap, opts = b
+        return (f'<figure class="fig m-side"{frame_style(opts)}><div class="side-grid"><div class="prose">{body_html(items)}</div>'
+                f'<div><div class="frame loop-frame"><video data-loop muted loop playsinline preload="metadata" poster="{r}assets/img/{v}-poster.webp" '
+                f'aria-label="{esc(strip_tags(cap))}"><source src="{r}assets/video/{v}.mp4" type="video/mp4" /></video></div>'
+                f'<p class="gcap">{cap}</p></div></div></figure>')
     if kind == 'clips':
         # Short silent clips side by side, each with its own controls.
         _, items, cap = b
@@ -446,7 +453,7 @@ def build_project(i, p):
         # Photo beside a muted clip that plays on its own while in view.
         clip = p['hero_clip']
         o.append(f'''<div class="cs-hero">
-  <figure class="m-single"><div class="frame hero-split"><span class="tag">Climbing test</span>{lb(r, hero_name, img(r, hero_name, eager=True), ALT.get(hero_name, ''))}<video data-loop muted loop playsinline preload="metadata" poster="{r}assets/img/{clip}-poster.webp" aria-label="{esc(ALT.get(clip, 'Project video'))}"><source src="{r}assets/video/{clip}.mp4" type="video/mp4" /></video></div></figure>
+  <figure class="m-single"><div class="frame hero-split"><span class="tag">{esc(hopts.get("badge", "Climbing test"))}</span>{f'<span class="tag tag-clip">{esc(hopts["clip_badge"])}</span>' if hopts.get("clip_badge") else ''}{lb(r, hero_name, img(r, hero_name, eager=True), ALT.get(hero_name, ''))}<video data-loop muted loop playsinline preload="metadata" poster="{r}assets/img/{clip}-poster.webp" aria-label="{esc(ALT.get(clip, 'Project video'))}"><source src="{r}assets/video/{clip}.mp4" type="video/mp4" /></video></div></figure>
 </div>
 ''')
     else:
