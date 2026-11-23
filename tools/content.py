@@ -211,6 +211,7 @@ PROJECTS = [
                 '<b>After that</b>: curves and steering, and a paper'])],
         blocks=[('single', 'gb-robot-studio', 'The robot today.', {'ar': '3/4', 'contain': True, 'small': True})]),
     ],
+    links_top=True,
     links=[('https://publish.illinois.edu/novelmobilerobotslab/', 'Novel Mobile Robots Lab'),
            ('https://www.robotouchlab.com/', 'RoboTouch Lab')],
   ),
