@@ -120,6 +120,7 @@ ALT = {
     'lekiwi-guide-final': 'Fully assembled LeKiwi on a table: arm folded over the two-plate omni-wheel base',
     'gb-val-wall': 'Suction module holding onto a textured wall, a hand held below it not touching',
     'lekiwi-loop': 'LeKiwi V2 driving up to an object and picking it up, in real time',
+    'lekiwi-v2-dynamixel': 'LeKiwi V2 on a wood floor: black Dynamixel arm with wrist camera on the omni-wheel base',
     'headshot': 'Portrait of Manav Chandaka',
     'lekiwi-v2-demo-poster': 'Dynamixel LeKiwi (V2) demo run',
     'lekiwi-loop-poster': 'LeKiwi V2 picking up an object',
@@ -260,12 +261,10 @@ PROJECTS = [
                  {'ar': '4/3'})]),
       dict(id='design', title='Design iterations', body=[
         ('p', 'V1 went from Fusion 360 to a working robot. <b>V2</b> was rebuilt around <b>Dynamixel servos</b>, with open-source integration work alongside Hugging Face LeRobot and ROBOTIS.')],
-        blocks=[('compare', [('lekiwi-cad-v1', 'CAD', 'Fusion 360 model of the robot'),
-                             ('lekiwi-v1-real', 'Hardware', 'The built robot')],
-                 'From CAD to hardware.', {'ar': '4/3', 'contain': True}),
-                ('compare', [('lekiwi-v1', 'V1', 'Original build with the SO-ARM'),
-                             ('lekiwi-v2', 'V2', 'Rebuilt around Dynamixel servos')],
-                 'V1 and V2.', {'ar': '1/1', 'contain': True})]),
+        blocks=[('row', [('lekiwi-cad-v1', 'CAD · Fusion 360 model'),
+                         ('lekiwi-v1-real', 'V1 · the built robot'),
+                         ('lekiwi-v2-dynamixel', 'V2 · rebuilt around Dynamixel servos')],
+                 'From CAD to V1 to V2.', {})]),
       dict(id='build-guide', title='Open-source build guide', body=[
         ('p', 'I wrote the build guide the community builds from: a <b>bill of materials</b>, <b>3D-printing</b> instructions, and <b>step-by-step assembly</b> with photos of every step, plus a separate guide for the Dynamixel version.')],
         blocks=[('gallery', [('lekiwi-guide-wheel-module', 'Step 1 · Assemble Wheel Modules'),
@@ -277,7 +276,7 @@ PROJECTS = [
         ('p', 'Validated in <b>MuJoCo simulation and on hardware</b>: kinematics, control response, and sensor and actuator integration.')],
         blocks=[('reel', [dict(video='lekiwi-v2-demo', poster='lekiwi-v2-demo-poster', tag='V2 demo · real time', label='Dynamixel LeKiwi (V2) driving and picking up objects, unedited, with sound'),
                           dict(video='lekiwi-community-demo', poster='lekiwi-community-poster', tag='Community build · Hugging Face', label='A community-built LeKiwi driving through the Hugging Face office, with sound'),
-                          dict(embed='https://drive.google.com/file/d/1PbPzd4VbM2CX7gkqXLyjAmToNDPtoq7_/preview', tag='Teleoperation', label='Teleoperation data collection')],
+                          dict(video='lekiwi-teleop', poster='lekiwi-teleop-poster', tag='Teleoperation', label='Teleoperating LeKiwi with its webcam stream for data collection, with sound')],
                  'Demo videos: the V2 robot driving and grasping in real time, a community build at Hugging Face, and teleoperated data collection.')]),
       dict(id='results', title='Results', body=[
         ('ul', ['<b>1,480+ GitHub stars, 160+ forks, and 100s of community builds</b>',
