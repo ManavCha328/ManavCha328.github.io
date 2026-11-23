@@ -453,7 +453,19 @@ def build_project(i, p):
 ''')
     badge = f'<span class="tag">{esc(hopts["badge"])}</span>' if hopts.get('badge') else ''
     bg = ' style="background:#fff"' if hero_name == 'climber-robot' else ''
-    if p.get('hero_clip'):
+    if p.get('hero_videos'):
+        # Demo loops side by side, each column sized to its clip's shape so all share one height.
+        cells, cols = '', []
+        for v, poster, tag, w, h, label in p['hero_videos']:
+            cols.append(f'{w / h:.3f}fr')
+            cells += (f'<div class="hv" style="--a:{w}/{h}"><span class="tag">{esc(tag)}</span><video data-loop muted loop playsinline preload="metadata" '
+                      f'poster="{r}assets/img/{poster}.webp" aria-label="{esc(label)}"><source src="{r}assets/video/{v}.mp4" type="video/mp4" /></video></div>')
+        ar = sum(w / h for _, _, _, w, h, _ in p['hero_videos'])
+        o.append(f'''<div class="cs-hero">
+  <figure class="m-single"><div class="hero-vids" style="grid-template-columns:{' '.join(cols)};--ar:{ar:.3f}">{cells}</div></figure>
+</div>
+''')
+    elif p.get('hero_clip'):
         # Photo beside a muted clip that plays on its own while in view.
         clip = p['hero_clip']
         o.append(f'''<div class="cs-hero">
