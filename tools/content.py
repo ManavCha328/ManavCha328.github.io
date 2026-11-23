@@ -553,8 +553,8 @@ PROJECTS = [
 
 # Homepage slideshow, in the previous site's order: (slug, image, fit whole image, title, subtitle)
 SLIDES = [
-    ('lekiwi', 'lekiwi-v1-real', False, 'LeKiwi: low-cost mobile manipulator', 'Open-source robotics · 1,480+ GitHub stars, 100s of community builds'),
-    ('climbing-robot', 'climber-robot', False, 'Suction climbing robot + GelBelt sensing', 'Research · Novel Mobile Robots Lab, UIUC'),
+    ('lekiwi', 'lekiwi-v1-real', True, 'LeKiwi: low-cost mobile manipulator', 'Open-source robotics · 1,480+ GitHub stars, 100s of community builds'),
+    ('climbing-robot', 'climber-robot', True, 'Suction climbing robot + GelBelt sensing', 'Research · Novel Mobile Robots Lab, UIUC'),
     ('fsae-brakes', 'fsae-brakes-car', True, 'Electric race-car brake system', 'Vehicle systems · Illini Electric Motorsports (FSAE)'),
     ('terratrek', 'terratrek-prototype', True, 'TerraTrek: crank-driven eight-bar walking mechanism', 'Classwork · ME 370 Mechanical Design I'),
     ('tarc-rocket', 'tarc-rockets', True, 'TARC competition rocket', 'Aerospace · 2023 national finalist from 800+ teams'),
