@@ -118,6 +118,7 @@ ALT = {
     'lekiwi-guide-bottom-plate': 'Bottom plate from above: three omni-wheel modules, battery, and wiring on the white perforated plate',
     'lekiwi-guide-top-plate': 'Top plate from above with the Raspberry Pi case and the arm base mounted',
     'lekiwi-guide-final': 'Fully assembled LeKiwi on a table: arm folded over the two-plate omni-wheel base',
+    'gb-val-wall': 'Suction module holding onto a textured wall, a hand held below it not touching',
     'headshot': 'Portrait of Manav Chandaka',
     'lekiwi-v2-demo-poster': 'Dynamixel LeKiwi (V2) demo run',
     'lekiwi-loop-poster': 'LeKiwi V2 picking up an object',
@@ -165,7 +166,9 @@ PROJECTS = [
                  [['Vinyl (selected)', '30.4'], ['Plastic', '26.8'], ['Buna-N rubber', '10.9']], 0)]),
       dict(id='validation', title='Suspension and validation', body=[
         ('p', 'Springs sized from measured cup stiffness (<b>14.4 N/cm</b>) keep the GelBelt pressed in with more than 10 N. The module held on upside down, on a wall, and on a curved aluminum profile, with clean GelBelt images.')],
-        blocks=[('single', 'gb-val-curved', 'Curved surface: the module on the aluminum profile, with GelBelt images from two runs.', {'ar': '1257/566', 'contain': True})]),
+        blocks=[('row', [('gb-val-curved', 'Curved surface: the module on the aluminum profile, with GelBelt images from two runs'),
+                         ('gb-val-wall', 'Wall: holding onto a textured wall with no hand support')],
+                 'Validation tests.', {})]),
       dict(id='chassis', title='Central chassis', body=[
         ('p', 'With adhesion proven, we built the full robot around a two-level chassis. Spring struts hold the top plate above the drive plate, so the GelBelt keeps its contact force as the cups below compress. The top plate carries the pump, servo controller, and computer, and routes the sensor cable and vacuum tubing.')],
         blocks=[('gallery', [('gb-chassis-suspension', 'Assembled and isolated suspension system'),
@@ -196,7 +199,7 @@ PROJECTS = [
         ('p', 'A <b>guide rail</b> now holds every valve on a fixed path, so the cups meet the surface in one even plane even though the chain isn’t rigid. Its profile gives each incoming cup the same speed along the surface as the cups already attached, and plastic bearings keep friction low.')],
         blocks=[('compare', [('gb-rail-deformed', 'The problem', 'On a vertical surface the chain sags away from its intended path'),
                              ('gb-jam-tilting', 'Jamming', 'Slack lets the valve tilt at its contact points')],
-                 'Why the robot needed rails.', {'ar': '1/1', 'contain': True}),
+                 'Why the robot needed rails.', {'ar': '1/1', 'contain': True, 'small': True}),
                 ('loop', 'gb-rail-sim', 'Python simulation used to design the rail: it traces each cup around the chain path to constrain where cups contact the surface and how the robot moves.', {'ar': '1280/510'}),
                 ('compare', [('gb-jam-fixed', 'Rail-guided valve', 'The valve held on a fixed path'),
                              ('gb-rail-incoming', 'Incoming cup', 'It meets the wall at the same speed as the cups in contact')],
@@ -210,7 +213,8 @@ PROJECTS = [
       dict(id='status', title='Where it stands', body=[
         ('ul', ['Adhesion and suspension are validated on inverted, wall, and curved surfaces',
                 'The assembled robot stays attached as its panel tilts from flat to vertical, and climbs the vertical panel',
-                '<b>Next</b>: test full-build contact behavior with suction and magnet valves together',
+                'Full-build contact tests with suction and the magnet valves working together are done, and the system works',
+                '<b>Now</b>: small mechanical tweaks to reduce leaking and even out the force across the cups',
                 '<b>Then measure</b>: cup attachment success, straight-line stability, GelBelt contact consistency, reconstruction accuracy, motor current by orientation, turning radius, and weight margin',
                 '<b>After that</b>: curves and steering, and a paper'])],
         blocks=[('single', 'gb-robot-studio', 'The robot today.', {'ar': '3/4', 'contain': True, 'small': True})]),

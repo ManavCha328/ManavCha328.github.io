@@ -358,7 +358,16 @@ def block_html(b, r):
         _, pair, cap, opts = b
         cells = ''.join(f'<div><div class="{frame_cls(opts)}"><span class="tag">{esc(lab)}</span>{lb(r, n, img(r, n), sub)}</div>'
                         f'<p class="sub">{esc(sub)}</p></div>' for n, lab, sub in pair)
-        return f'<figure class="fig m-compare{" narrow" if opts.get("narrow") else ""}"{frame_style(opts)}><div class="pair">{cells}</div>{figcap(cap)}</figure>'
+        size = ' narrow' if opts.get('narrow') else ' small' if opts.get('small') else ''
+        return f'<figure class="fig m-compare{size}"{frame_style(opts)}><div class="pair">{cells}</div>{figcap(cap)}</figure>'
+    if kind == 'row':
+        # Images side by side at one shared height: each column is sized to its image's shape.
+        _, items, cap, opts = b
+        ratios = [dims(n)[0] / dims(n)[1] for n, _ in items]
+        cols = ' '.join(f'{x:.3f}fr' for x in ratios)
+        cells = ''.join(f'<div><div class="frame" style="aspect-ratio:{dims(n)[0]}/{dims(n)[1]}">{lb(r, n, img(r, n), c)}</div><p class="gcap">{esc(c)}</p></div>'
+                        for n, c in items)
+        return f'<figure class="fig m-row"><div class="row-grid" style="grid-template-columns:{cols}">{cells}</div>{figcap(cap)}</figure>'
     if kind == 'sequence':
         _, steps, cap, opts = b
         cells = ''.join(f'<div class="step"><div class="{frame_cls(opts)}">{lb(r, n, img(r, n), lab)}</div>'
